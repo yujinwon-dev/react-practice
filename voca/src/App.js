@@ -8,7 +8,9 @@ function App() {
     <div className="App">
       <div className={styles.box}>App</div>
       <Hello />
-      <Name />
+      <Name age={10} />
+      <Name age={20} />
+      <Name age={30} />
     </div>
   );
 }
