@@ -1,18 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { Provider, useSelector, useDispatch, connect } from 'react-redux';
-
-function reducer(currentState, action) {
-  if (currentState === undefined) {
-    return { number: 1};
-  }
-  const newState = {...currentState}; // 복제본을 이용해서 불변성 유지
-  // useDispatch에서 작성한 type을 여기서 사용
-  if (action.type === 'PLUS') {
-    newState.number++;
-  }
-  return newState;
-}
-const store = configureStore({ reducer });
+import store from './store/store';
+import { Provider, useSelector, useDispatch } from 'react-redux';
+import { plus } from './store/number';
 
 export default function App() {
   return (
@@ -49,7 +37,7 @@ function Left2() {
 
 function Left3() {
   console.log('Left3');
-  const number = useSelector(state => state.number);
+  const number = useSelector(state => state.number.value);
   return (
     <div>
       <h1>Left3: {number}</h1>
@@ -80,7 +68,7 @@ function Right3() {
   return (
     <div>
       <h1>Right3</h1>
-      <button type="button" onClick={() => dispatch({ type: 'PLUS' })}>+</button>
+      <button type="button" onClick={() => dispatch(plus())}>+</button>
     </div>
   );
 }
